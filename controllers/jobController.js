@@ -25,12 +25,13 @@ exports.createJob = catchAsync(async(req, res, next)=>{
             job: newJob,
         },
     });
+    
 });
 
-exports.getOneJobsById = catchAsync(async(req, res, next)=>{
-    const job = await Job.findById()
+exports.getOneJob = catchAsync(async(req, res, next)=>{
+    const job = await Job.findById(req.params.id)
     if(!job){
-        return next(new AppError('No article found with that title', 400));
+        return next(new AppError('No Job found with that ID', 400));
     }
     res.status(200).json({
         status: 'success',
@@ -38,4 +39,33 @@ exports.getOneJobsById = catchAsync(async(req, res, next)=>{
             job,
         },
     });
-})
+    
+});
+
+exports.updateJob = catchAsync (async (req,res,next)=>{
+    const job = await Job.findByIdAndUpdate(req.params.id, req.body,{
+        new: true,
+        runValidators:true,
+    });
+    if(!job){
+        return next(new AppError('No Job found with that ID',400));
+    }
+    res.status(200).json({
+        status: "success",
+        data:{
+            job,
+        },
+    });
+    
+});
+exports.deleteJob = catchAsync (async (req,res, next)=>{
+    const job = await Job.findByIdAndDelete(req.params.id);
+        if(!job){
+            return next(new AppError('No Job found with that ID'));
+        }
+        res.status(204).json({
+            status: "success",
+            data: null,
+        });
+        
+});

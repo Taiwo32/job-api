@@ -12,7 +12,7 @@ router
 .delete(jobController.deleteJob);
 
 router
-.route('/job/:id').get(jobController.getOneJobById)
+.route('/job/:id').get(jobController.getOneJob)
 
 
 module.exports = router;

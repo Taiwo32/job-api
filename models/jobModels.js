@@ -1,6 +1,7 @@
 // const { ObjectId } = require('bson')
 const mongoose = require('mongoose')
 
+
 const jobSchema = new mongoose.Schema({
     company: {
         type: String,
@@ -23,11 +24,11 @@ const jobSchema = new mongoose.Schema({
         default: Date.now(),
         select: false
     },
-    createdBy: {
-        type: mongoose.Types.ObjectId,
-        ref: "user",
-        required: [true, ""]
-    }
+    // createdBy: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "user",
+    //     required: [true, ""]
+    // }
 });
 const job = mongoose.model('job', jobSchema)
 
