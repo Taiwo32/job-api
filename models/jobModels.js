@@ -19,6 +19,10 @@ const jobSchema = new mongoose.Schema({
         enum: ['Active','Inactive' ],  
         default: "Active", 
     },
+    link:{
+        type: String,
+        required: [true, "Please provide the url to the job"]
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
@@ -26,8 +30,8 @@ const jobSchema = new mongoose.Schema({
     },
     // createdBy: {
     //     type: mongoose.Types.ObjectId,
-    //     ref: "user",
-    //     required: [true, ""]
+    //     ref: "User",
+    //     required: [true, "hgcvytgfvuyfvuy"]
     // }
 });
 const job = mongoose.model('job', jobSchema)
