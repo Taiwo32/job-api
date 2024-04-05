@@ -16,9 +16,9 @@ exports.getAllJobs = catchAsync(async(req, res, next)=>{
 
 exports.createJob = catchAsync(async(req, res, next)=>{
 
-    const {company, position, status} = req.body
+    const {company, position, status, link,} = req.body
 
-    const newJob = await Job.create({company,position,status});
+    const newJob = await Job.create({company,position,status, link,});
     res.status(201).json({
         status: 'success',
         data:{
@@ -63,7 +63,7 @@ exports.updateJob = catchAsync (async (req,res,next)=>{
 exports.deleteJob = catchAsync (async (req,res, next)=>{
     const job = await Job.findByIdAndDelete(req.params.id);
         if(!job){
-            return next(new AppError('No Job found with that ID'));
+            return next(new AppError('No Job found with that ID', 401));
         }
         res.status(204).json({
             status: "success",
